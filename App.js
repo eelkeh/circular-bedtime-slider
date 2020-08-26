@@ -14,7 +14,12 @@ const START_POS = {
   angleLength: Math.PI,
 };
 
-const radToBase12 = (rad) => (rad / MAX_RAD) * 12;
+const radToBase12 = (rad) => {
+  let val = (rad / MAX_RAD) * 12;
+  // fix rounding of 0.9999~ numbers
+  if (val % 1 > 0.99) return Math.ceil(val);
+  return val;
+};
 
 const toMinutes = (fraction) => Math.round(fraction * 60);
 
